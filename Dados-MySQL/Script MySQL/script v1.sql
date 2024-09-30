@@ -1,29 +1,34 @@
-use dbnexus;
+CREATE DATABASE dbnexus;
 
--- Criação da tabela aluno
-CREATE TABLE IF NOT EXISTS aluno (
-    idAluno INT AUTO_INCREMENT PRIMARY KEY,
-	instituicao VARCHAR(45) NOT NULL,
-    serie VARCHAR(45) NOT NULL,
-    periodo VARCHAR(45) NOT NULL
+USE dbnexus;
+
+-- Criação da tabela 'instituicao'
+CREATE TABLE instituicao (
+    idInstituicao INT AUTO_INCREMENT PRIMARY KEY,
+    nome_instituicao VARCHAR(45) NOT NULL,
+    nome_departamento VARCHAR(45),
+    turma_idTurma INT,
+    FOREIGN KEY (turma_idTurma) REFERENCES turma(idTurma)
 );
 
--- Criação da tabela disciplina
-CREATE TABLE IF NOT EXISTS disciplina (
-    idDisciplina INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(45) UNIQUE NOT NULL 
+-- Criação da tabela 'turma'
+CREATE TABLE turma (
+    idTurma INT AUTO_INCREMENT PRIMARY KEY,
+    serie VARCHAR(45),
+    periodo VARCHAR(45)
 );
 
--- Criação da tabela notas_aluno
-CREATE TABLE IF NOT EXISTS nota_aluno (
-    fkAluno INT,
-    fkDisciplina INT,
-    nota VARCHAR(45) NOT NULL,
-    PRIMARY KEY (fkAluno, fkDisciplina),
-    FOREIGN KEY (fkAluno) REFERENCES aluno(idAluno),
-    FOREIGN KEY (idDisciplina) REFERENCES disciplina(idDisciplina)
+-- Criação da tabela 'disciplina'
+CREATE TABLE disciplina (
+    idDisc INT AUTO_INCREMENT PRIMARY KEY,
+    nome_disciplina VARCHAR(45)
 );
 
-drop table disciplina;
-drop table aluno;
-drop table nota_aluno;
+-- Criação da tabela 'notas_turma'
+CREATE TABLE notas_turma (
+    dkAluno INT,
+    fkDisc INT,
+    media VARCHAR(45),
+    PRIMARY KEY (dkAluno, fkDisc),
+    FOREIGN KEY (fkDisc) REFERENCES disciplina(idDisc)
+);
