@@ -1,4 +1,4 @@
-<h1 align="center">Nexus - Base de Dados</h1>
+<h1 align="center">Nexus - Banco de Dados</h1>
 
 
 <p align="center">
