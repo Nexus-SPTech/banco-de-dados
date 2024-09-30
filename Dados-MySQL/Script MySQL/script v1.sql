@@ -15,11 +15,15 @@ CREATE TABLE IF NOT EXISTS disciplina (
 );
 
 -- Criação da tabela notas_aluno
-CREATE TABLE IF NOT EXISTS notas_aluno (
+CREATE TABLE IF NOT EXISTS nota_aluno (
     fkAluno INT,
     fkDisciplina INT,
     nota VARCHAR(45) NOT NULL,
-    PRIMARY KEY (fkAluno, fkDisc),
+    PRIMARY KEY (fkAluno, fkDisciplina),
     FOREIGN KEY (fkAluno) REFERENCES aluno(idAluno),
     FOREIGN KEY (idDisciplina) REFERENCES disciplina(idDisciplina)
 );
+
+drop table disciplina;
+drop table aluno;
+drop table nota_aluno;
