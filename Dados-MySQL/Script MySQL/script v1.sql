@@ -11,16 +11,16 @@ DROP TABLE IF EXISTS notas_turma;
 CREATE TABLE IF NOT EXISTS instituicao (
     idInstituicao INT AUTO_INCREMENT PRIMARY KEY,
     nome_instituicao VARCHAR(45) NOT NULL,
-    nome_departamento VARCHAR(45),
-    turma_idTurma INT,
-    FOREIGN KEY (turma_idTurma) REFERENCES turma(idTurma)
+    nome_departamento VARCHAR(45)
 );
 
 -- Criação da tabela 'turma'
 CREATE TABLE IF NOT EXISTS turma (
     idTurma INT AUTO_INCREMENT PRIMARY KEY,
     serie VARCHAR(45),
-    periodo VARCHAR(45)
+    periodo VARCHAR(45),
+    fkInstituicao INT,
+    FOREIGN KEY (fkInstituicao) REFERENCES instituicao(idInstituicao)
 );
 
 -- Criação da tabela 'disciplina'
@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS disciplina (
 
 -- Criação da tabela 'notas_turma'
 CREATE TABLE IF NOT EXISTS  notas_turma (
-    dkAluno INT,
+    fkTurma INT,
     fkDisc INT,
     media VARCHAR(45),
-    PRIMARY KEY (dkAluno, fkDisc),
+    PRIMARY KEY (fkTurma, fkDisc),
     FOREIGN KEY (fkDisc) REFERENCES disciplina(idDisc)
 );
